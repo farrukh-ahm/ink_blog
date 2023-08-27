@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'ink',
     'materializecssform',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
