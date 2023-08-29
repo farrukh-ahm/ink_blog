@@ -1,3 +1,5 @@
-body{
-    background-color: black !important;
+@media (min-width: 800px){
+    #title{
+        padding-inline-start: 1.25rem;
+    }
 }
