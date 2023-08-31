@@ -3,3 +3,7 @@
         padding-inline-start: 1.25rem;
     }
 }
+
+.card-handler{
+    margin-block-start: 1rem !important;
+}

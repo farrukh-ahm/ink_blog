@@ -4,8 +4,9 @@ from django.views import generic, View
 from .models import *
 from django.utils.text import slugify
 
-class Home(View):
+class Home(generic.ListView):
 
-    def get(self, request, *args, **kwargs):
-
-        return render(request, 'index.html')
+    model = Post
+    queryset = Post.objects.all()
+    paginate_by = 9
+    template_name = 'index.html'
