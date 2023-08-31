@@ -1,25 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+    <!-- <div class="row">
+        <div class="col s6 m4 push-s4 push-m6">
+            <a href=""><i class="material-icons">add_circle_outline</i> Add</a>
+        </div>
+    </div> -->
     
+    <div class="center">
+        <a href="#"><i class="material-icons">add_circle</i><span>Add Post</span></a>
+    </div>
+
     {% for post in post_list %}
+
+
         <div class="row">
-            <div class="col s12 m7 card-handler">
+            <div class="col s12 m4 card-handler">
                 <div class="card">
                     <div class="card-image">
                         <img src="{{post.featured_image.url}}" alt="{{post.title}}">
                         <span class="card-title red-text text-darken-1">{{post.title}}</span>
                     </div>
-                        <div class="card-content">
-                            <p class="purple-text text-darken-4">{{post.excerpt}}</p>
-                        </div>
+                    <div class="card-content">
+                        <p class="purple-text text-darken-4">{{post.excerpt}}</p>
+                    </div>
                     <div class="card-action">
-                        <a href="#">This is a link</a>
+                        <a href="#" class="btn">Read</a>
+                        {% if user.is_authenticated %}
+                            {% if user.id in post.user_like %}
+                                <a href=""><i class="material-icons right">star</i></a>
+                            {% else %}
+                                <a href="#"><i class="material-icons right">star_border</i></a>
+                            {% endif %}
+                        {% else %}
+                            <a href="#">LogIn</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
             {% if forloop.counter|divisibleby:3 %}
-      </div>
+        </div>
       <div class="row">
             {% endif %}
         

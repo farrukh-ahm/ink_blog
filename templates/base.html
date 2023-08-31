@@ -55,11 +55,9 @@
     </ul>
 
     {% if user.is_authenticated %}
-    <div class="row">
-        <div class="col s4 m4 push-s4 push-m6">
+        <div class="center" id="greeting" style="margin: 1.5rem;">
             Welcome {{user.get_username}}
         </div>
-    </div>
     {% endif %}
 
     <div class="container">

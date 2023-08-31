@@ -26,6 +26,14 @@ class Post(models.Model):
     def likes_count(self):
         return self.likes.count()
 
+    def user_like(self):
+        like = self.likes.all()
+        users = []
+        for i in like:
+            users.append(i.id)
+        return users
+
+
 
 class Comment(models.Model):
     commented_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='commented_by')
