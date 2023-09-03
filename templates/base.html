@@ -25,22 +25,22 @@
                         <li><a href="" class="purple-text text-darken-4">Posts</a></li>
                         <li><a href="" class="purple-text text-darken-4">Profile</a></li>
                         <li><a href="{% url 'admin:index' %}" class="purple-text text-darken-4">Admin</a></li>
-                        <li><a href="" class="purple-text text-darken-4">LogOut</a></li>
+                        <li><a href="{% url 'account_logout' %}" class="purple-text text-darken-4">LogOut</a></li>
                     </ul>
                 {% else %}
                 <ul class="right hide-on-med-and-down ">
                     <li><a href="" class="purple-text text-darken-4">Home</a></li>
                     <li><a href="" class="purple-text text-darken-4">Posts</a></li>
                     <li><a href="" class="purple-text text-darken-4">Profile</a></li>
-                    <li><a href="" class="purple-text text-darken-4">LogOut</a></li>
+                    <li><a href="{% url 'account_logout' %}" class="purple-text text-darken-4">LogOut</a></li>
                 </ul>
                 {% endif %}
             {% else %}
 
                 <ul class="right hide-on-med-and-down ">
                     <li><a href="" class="purple-text text-darken-4">Home</a></li>
-                    <li><a href="" class="purple-text text-darken-4">LogIn</a></li>
-                    <li><a href="" class="purple-text text-darken-4">SignUp</a></li>
+                    <li><a href="{% url 'account_login' %}" class="purple-text text-darken-4">LogIn</a></li>
+                    <li><a href="{% url 'account_signup' %}" class="purple-text text-darken-4">SignUp</a></li>
                 </ul>
 
             {% endif %}
