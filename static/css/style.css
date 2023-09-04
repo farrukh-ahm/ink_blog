@@ -13,3 +13,18 @@
     background-color: black !important;
     padding-block-start: 1rem !important;
 }
+
+.add{
+    margin-block: 2rem;
+    /* position: relative; */
+}
+
+.add-link{
+    /* inline-size: 10rem; */
+    /* position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); */
+    /* margin-block-end: 2rem; */
+    justify-content: center;
+}
