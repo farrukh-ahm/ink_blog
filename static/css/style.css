@@ -28,3 +28,28 @@
     /* margin-block-end: 2rem; */
     justify-content: center;
 }
+
+.auth-title{
+    margin-block-end: 2.5rem;
+    color: brown;
+}
+
+.auth-p{
+    margin-block-end: 4rem;
+}
+
+.auth-form{
+    outline: 1px solid goldenrod;
+    outline-offset: 2rem;
+    padding: 2rem;
+}
+
+.auth-form input{
+    color: brown;
+}
+
+.signout-container{
+    outline: 1px solid goldenrod;
+    outline-offset: 2rem;
+    margin-block-start: 5rem;
+}

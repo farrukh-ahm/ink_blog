@@ -7,6 +7,6 @@ from django.utils.text import slugify
 class Home(generic.ListView):
 
     model = Post
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().filter(status=1)
     paginate_by = 9
     template_name = 'index.html'
