@@ -9,7 +9,7 @@
     </div> -->
     
     <div class="add">
-        <a href="#" class="valign-wrapper add-link">
+        <a href="{% url 'add_post' request.user %}" class="valign-wrapper add-link">
             <i class="material-icons">add_circle</i><span>Add Post</span>
         </a>
     </div>
@@ -34,6 +34,10 @@
                         <p class="purple-text text-darken-4">{{post.excerpt}}</p>
                     </div>
                     <div class="card-action">
+                        <div class="small-container">
+                            <small class="right">{{post.created_on}}</small>
+                            <small>Author: {{post.author}}</small>
+                        </div>
                         <a href="#" class="btn">Read</a>
                         {% if user.is_authenticated %}
                             {% if user.id in post.user_like %}

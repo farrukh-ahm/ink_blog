@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div>
+        <h4 class="center">What's On Your Mind?</h4>
+    </div>
+
+    <div class="row">
+
+        <form class="col s12 m8 l6 offset-m3 offset-l3 add_post_form" action="{% url 'add_post' request.user%}" method="post" enctype="multipart/form-data">
+            {{add_post_form.as_p}}
+            {% csrf_token %}
+            <button class="btn" type="submit">Submit</button>
+        </form>
+
+    </div>
+
+{% endblock %}

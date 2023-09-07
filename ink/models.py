@@ -11,14 +11,14 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author')
     excerpt = models.TextField(blank=False)
     content = models.TextField(blank=False)
-    created_on = models.DateField(auto_now=True)
-    edited_on = models.DateField(auto_now=True)
+    created_on = models.DateTimeField(auto_now=True)
+    edited_on = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(User, related_name='likes')
     featured_image = models.ImageField(upload_to='ink/', default='ink/ink_blot')
     status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
-        ordering = ['created_on']
+        ordering = ['-created_on']
     
     def __str__(self):
         return f'{self.author}: {self.title}'
