@@ -35,3 +35,16 @@ class AddPost(View):
         messages.success(request, "Post Added!")
         return redirect("/")
 
+
+class PostDetail(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.all()
+        post_detail = get_object_or_404(queryset, slug=slug)
+        comments = post_detail.commented_post.all()
+        context = {
+            'post_detail': post_detail,
+            'comments': comments
+        }
+
+        return render(request, 'post_detail.html', context)

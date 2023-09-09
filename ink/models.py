@@ -39,11 +39,11 @@ class Comment(models.Model):
     commented_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='commented_by')
     commented_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='commented_post')
     commented_text = models.TextField(blank=False)
-    created_on = models.DateField(auto_now=True)
+    created_on = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['created_on']
+        ordering = ['-created_on']
 
     def __str__(self):
         return f'{self.commented_by}: {self.commented_text}'

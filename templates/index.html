@@ -38,7 +38,7 @@
                             <small class="right">{{post.created_on}}</small>
                             <small>Author: {{post.author}}</small>
                         </div>
-                        <a href="#" class="btn">Read</a>
+                        <a href="{% url 'post_detail' post.slug %}" class="btn">Read</a>
                         {% if user.is_authenticated %}
                             {% if user.id in post.user_like %}
                                 <a href=""><i class="material-icons right">star</i></a>

@@ -74,3 +74,25 @@ h4{
 textarea{
     min-block-size: 25rem;
 }
+
+
+/* --------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------- POST DETAIL ------------------------------------------------------- */
+
+.post-image{
+    block-size: 30rem;
+    inline-size: 20rem;
+    /* background-color: aqua; */
+}
+
+.post-image > img {
+    block-size: 100%;
+    inline-size: 100%;
+    border-radius: 10px;
+}
+
+.post-content{
+    margin-block: 2rem;
+    font-size: large;
+    text-align: justify;
+}

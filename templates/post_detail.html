@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12 m8 l8 offset-m3 offset-l2">
+            <h4 class="center">{{post_detail.title}}</h4>
+        </div>
+        <div class="col s12 m8 l8 offset-m3 offset-l2 post-image">
+            <img src="{{post_detail.featured_image.url}}" alt="image for {{post_detail.title}}" class="">
+        </div>
+        <div class="col s12 m8 l8 offset-m3 offset-l2 post-content">
+            {{post_detail.content}}
+        </div>
+        <div class="col s12 m8 l8 offset-m3 offset-l2">
+            <small>Author: {{post_detail.author}}</small>
+        </div>
+        <div class="col s12 m8 l8 offset-m3 offset-l2">
+            <small>Created On: {{post_detail.created_on}}</small>
+        </div>
+    </div>
+
+    {% if comments %}
+        {{comments}}
+    {% else %}
+        <p>No comments</p>
+    {% endif %}
+
+    <!-- {% for comment in comments %}
+            {{comment.text}}
+        {% empty %}
+            <p>No comments</p>
+    {% endfor %} -->
+
+{% endblock %}
