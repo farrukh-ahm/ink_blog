@@ -32,6 +32,8 @@ class AddPost(View):
             new_post.slug = slugify(f'{request.user}-{new_post.title}')
 
             new_post.save()
+        else:
+            add_post_form = PostForm()
         messages.success(request, "Post Added!")
         return redirect("/")
 
@@ -41,10 +43,54 @@ class PostDetail(View):
     def get(self, request, slug, *args, **kwargs):
         queryset = Post.objects.all()
         post_detail = get_object_or_404(queryset, slug=slug)
+        id = post_detail.id
         comments = post_detail.commented_post.all()
+        comment_form = CommentForm()
         context = {
             'post_detail': post_detail,
-            'comments': comments
+            'id' : id,
+            'comments': comments,
+            'comment_form': comment_form,
+            'is_True': True,
+            'is_False': False,
         }
 
         return render(request, 'post_detail.html', context)
+
+class PostComment(View):
+
+    def post(self, request, slug, *args, **kwargs):
+        print(f'SLUG: {slug}')
+        try:
+            post_find = Post.objects.get(slug=slug)
+            print(post_find)
+        except Post.DoesNotExist:
+            print("Does not exist")
+    
+        # queryset = Post.objects.all()
+        # post = get_object_or_404(queryset, slug=post_find.slug)
+
+        comment_post = CommentForm(request.POST)
+        print(f'ID: {post_find}')
+
+        if comment_post.is_valid:
+            comment = comment_post.save(commit=False)
+            comment.commented_by = request.user
+            comment.commented_post = post_find
+            comment.approved = False
+
+            comment.save()
+        else:
+            comment_post = CommentForm()
+        
+        return redirect(reverse('post_detail', args=[post_find.slug]))
+
+class CommentApprove(View):
+
+    def post(self, request, id, *args, **kwargs):
+        comment = Comment.objects.get(id=id)
+        post = comment.commented_post
+        comment.approved = True
+        comment.save()
+
+        return redirect(reverse('post_detail', args=[post.slug]))

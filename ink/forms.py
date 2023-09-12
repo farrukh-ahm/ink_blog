@@ -19,3 +19,9 @@ class PostForm(forms.ModelForm):
         widget = {
             'content' : SummernoteWidget(),
         }
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('commented_text',)

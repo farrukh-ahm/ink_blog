@@ -72,7 +72,7 @@ h4{
 }
 
 textarea{
-    min-block-size: 25rem;
+    block-size: 25rem;
 }
 
 
@@ -95,4 +95,14 @@ textarea{
     margin-block: 2rem;
     font-size: large;
     text-align: justify;
+}
+
+.article-container{
+    border-bottom: 1px solid black;
+    padding-block-end: 1em;
+}
+
+.comment-box textarea{
+    block-size: 5rem;
+    inline-size: 40rem;
 }

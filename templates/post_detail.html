@@ -2,8 +2,8 @@
 
 
 {% block content %}
-
-    <div class="row">
+    
+    <div class="row article-container">
         <div class="col s12 m8 l8 offset-m3 offset-l2">
             <h4 class="center">{{post_detail.title}}</h4>
         </div>
@@ -21,8 +21,43 @@
         </div>
     </div>
 
+    <div class="row">
+        <h5 class="col s2 m2 l2">Comments:</h5>
+    </div>
+
+    {% if user.is_authenticated %}
+
+        <div class="row">
+
+            <form action="{% url 'post_comment' post_detail.slug %}" method="POST" class="col s12 m4 l4 comment-box">
+                {{comment_form}}
+                {% csrf_token %}
+                <button class="btn left">Submit</button>
+            </form>
+
+        </div>
+    {% endif %}
+
     {% if comments %}
-        {{comments}}
+    
+        {% for comment in comments  %}
+            {% if post_detail.author == request.user and not comment.approved %}
+                <p>{{comment.commented_text}}</p>
+                <p>{{comment.commented_by}}</p>
+                <form action="{% url 'comment_approve' comment.id %}" method="POST">
+                    {% csrf_token %}
+                    <button>Approve</button> <button>Delete</button>
+                </form>
+            {% endif %}
+        {% endfor %}
+
+        {% for comment in comments %}
+            {% if comment.approved %}
+                <p>{{comment.commented_text}}</p>
+                <p>{{comment.commented_by}}</p>
+            {% endif %}
+        {% endfor %}
+
     {% else %}
         <p>No comments</p>
     {% endif %}
