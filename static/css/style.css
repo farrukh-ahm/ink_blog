@@ -104,7 +104,12 @@ textarea{
 
 .comment-box textarea{
     block-size: 5rem;
-    inline-size: 40rem;
+    /* max-inline-size: 40rem; */
+    margin-block-end: 1rem;
+}
+
+@media (max-width: 380px){
+    .approval-btn {margin-block-start: 0.5rem;}
 }
 
 /* hr{

@@ -94,3 +94,13 @@ class CommentApprove(View):
         comment.save()
 
         return redirect(reverse('post_detail', args=[post.slug]))
+
+class CommentDelete(View):
+
+    def post(self, request, id, *args, **kwargs):
+        print("1st step")
+        comment = Comment.objects.get(id=id)
+        post = comment.commented_post
+        comment.delete()
+
+        return redirect(reverse('post_detail', args=[post.slug]))

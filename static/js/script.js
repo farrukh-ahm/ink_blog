@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', ()=> {
-    console.log("connected, hello")
-    console.log("here")
+    console.log("connected")
     // NAVBAR INIT
     var navbar = document.querySelectorAll('.sidenav');
     M.Sidenav.init(navbar);
@@ -10,20 +9,22 @@ document.addEventListener('DOMContentLoaded', ()=> {
     M.FormSelect.init(selectInt);
 
     // MODAL TRIGGER
-    // let elems = document.querySelectorAll('.modal');
-    // M.Modal.init(elems);
     let popOp = document.querySelector('.modal');
     let modal = M.Modal.init(popOp);
-    let modalTrigger = document.querySelector(".modal-trigger")
-    let modalClose = document.querySelector(".modal-close")
-    modalTrigger.addEventListener("click", ()=>{
-      console.log("click")
+    let modalTrigger = document.querySelector(".modal-trigger");
+    let modalClose = document.querySelectorAll(".modal-close");
+    let idHandler = document.querySelector(".approval-delete-form")
+    modalTrigger.addEventListener("click", (e)=>{
+      let commentId = e.target.getAttribute("data-type")
+      idHandler.setAttribute("action", `/comment_delete/${commentId}`)
+      console.log(commentId)
       modal.open()
     })
-    for(let close of modalClose){
-     close.addEventListener("click", ()=>{
+
+    modalClose.forEach(close => ()=>{
+      close.addEventListener("click", ()=>{
         modal.close()
+      })
     })
-    }
 
   });
