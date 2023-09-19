@@ -109,10 +109,15 @@ class CommentDelete(View):
 class UserPosts(View):
 
     def get(self, request, *args, **kwargs):
-        user_posts = Post.objects.filter(author=request.user)
-        context = {
-            'user_posts': user_posts,
-        }
+        try:
+            user_posts = Post.objects.filter(author=request.user)
+            context = {
+                'user_posts': user_posts,
+            }
+        except:
+            context = {
+                'user_posts': "Not Authorised"
+            }
 
         return render(request, 'userposts.html', context)
 

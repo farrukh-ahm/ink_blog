@@ -3,64 +3,70 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<div class="add">
-    <a href="{% url 'add_post' request.user %}" class="valign-wrapper add-link">
-        <i class="material-icons">add_circle</i><span>Add Post</span>
-    </a>
-</div>
-{% endif %}
+    <div class="add">
+        <a href="{% url 'add_post' request.user %}" class="valign-wrapper add-link">
+            <i class="material-icons">add_circle</i><span>Add Post</span>
+        </a>
+    </div>
 
-{% for post in user_posts %}
+    {% for post in user_posts %}
 
 
-<div class="row">
-    <div class="col s12 m4 card-handler">
-        <div class="card">
-            <div class="card-image">
-                <img src="{{post.featured_image.url}}" alt="{{post.title}}">
-                <span class="card-title red-text text-darken-1">{{post.title}}</span>
-            </div>
-            <div class="card-content">
-                <p class="purple-text text-darken-4">{{post.excerpt}}</p>
-            </div>
-            <div class="card-action">
-                <div class="small-container">
-                    <small class="right">{{post.created_on}}</small>
-                    <small>Author: {{post.author}}</small>
+    <div class="row">
+        <div class="col s12 m4 card-handler">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{post.featured_image.url}}" alt="{{post.title}}">
+                    <span class="card-title red-text text-darken-1">{{post.title}}</span>
                 </div>
-                <div class="row">
-                    <a href="{% url 'post_detail' post.slug %}" class="col s12 m12 l12 btn-small">Read</a>
+                <div class="card-content">
+                    <p class="purple-text text-darken-4">{{post.excerpt}}</p>
                 </div>
-                <div class="row">
-                    <a href="" class="col s12 m12 l12 btn-small">Edit</a>
-                </div>
-                <div class="row">
-                    <a href="" class="col s12 m12 l12 btn-small">Delete</a>
+                <div class="card-action">
+                    <div class="small-container">
+                        <small class="right">{{post.created_on}}</small>
+                        <small>Author: {{post.author}}</small>
+                    </div>
+                    <div class="row">
+                        <a href="{% url 'post_detail' post.slug %}" class="col s12 m12 l12 btn-small">Read</a>
+                    </div>
+                    <div class="row">
+                        <a href="" class="col s12 m12 l12 btn-small">Edit</a>
+                    </div>
+                    <div class="row">
+                        <a href="" class="col s12 m12 l12 btn-small">Delete</a>
+                    </div>
                 </div>
             </div>
         </div>
+        {% if forloop.counter|divisibleby:3 %}
     </div>
-    {% if forloop.counter|divisibleby:3 %}
-</div>
-<div class="row">
+    <div class="row">
+        {% endif %}
+
+    {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+
+        <ul class="pagination center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+            {% endif %}
+        </ul>
+
     {% endif %}
+{%else%}
 
-{% endfor %}
-</div>
-
-<!-- Pagination -->
-{% if is_paginated %}
-
-    <ul class="pagination center">
-        {% if page_obj.has_previous %}
-        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-        {% endif %}
-        {% if page_obj.has_next %}
-        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-
-        {% endif %}
-    </ul>
-
+    <div class="center">
+        <h4>Not Authenticated</h4>
+    </div>
+        
 {% endif %}
 
 {% endblock %}
