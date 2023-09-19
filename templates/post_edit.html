@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="">
+    {{edit_form}}
+    {% csrf_token %}
+    <button class="btn-small">Save</button>
+    <button class="btn-small">Cancel</button>
+</form>
+
+{% endblock %}

@@ -31,7 +31,9 @@
                         <a href="{% url 'post_detail' post.slug %}" class="col s12 m12 l12 btn-small">Read</a>
                     </div>
                     <div class="row">
-                        <a href="" class="col s12 m12 l12 btn-small">Edit</a>
+                        <form action="{% url 'post_edit' request.user post.slug %}">
+                            <button href="" class="col s12 m12 l12 btn-small">Edit</button>
+                        </form>
                     </div>
                     <div class="row">
                         <a href="" class="col s12 m12 l12 btn-small">Delete</a>

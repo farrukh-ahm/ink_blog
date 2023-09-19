@@ -122,4 +122,13 @@ class UserPosts(View):
         return render(request, 'userposts.html', context)
 
 
-# class PostEdit(View):
+class PostEdit(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.get(slug=slug)
+        edit_form = PostForm(instance=queryset)
+        context = {
+            'edit_form': edit_form
+        }
+
+        return render(request, 'post_edit.html', context)
