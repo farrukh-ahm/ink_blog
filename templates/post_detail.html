@@ -40,17 +40,12 @@
 
     {% if comments %}
 
-        {% if post_detail.author == request.user %}
-            <hr style="margin-block-start: 1.5rem;">
-            <div class="row">
-                <h6 class="col s12 m6 l4">Pending Approval:</h6>
-            </div>
-        {% endif %}
     
         {% for comment in comments  %}
             {% if post_detail.author == request.user and not comment.approved %}
                 <div class="row">
                     <div class="col s12 m6 l4">
+                        <small>(Pending)</small>
                         <a>{{comment.commented_by}}:</a>
                         <span>{{comment.commented_text}}</span>
                     </div>
