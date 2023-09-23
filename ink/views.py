@@ -128,7 +128,27 @@ class PostEdit(View):
         queryset = Post.objects.get(slug=slug)
         edit_form = PostForm(instance=queryset)
         context = {
+            'post': queryset,
             'edit_form': edit_form
         }
 
         return render(request, 'post_edit.html', context)
+
+    def post(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.get(slug=slug)
+        edit_form = PostForm(request.POST, request.FILES, instance=queryset)
+
+        if edit_form.is_valid:
+
+            edit_details = edit_form.save(commit=False)
+            edit_details.author = request.user
+            edit_details.slug = slugify(f'{request.user}-{edit_details.title}')
+            edit_details.save()
+
+            return redirect(reverse('post_detail', args=[edit_details.slug]))
+        
+        else:
+            edit_form = PostForm()
+
+            return redirect(reverse('post_detail', args=[slug]))
+
