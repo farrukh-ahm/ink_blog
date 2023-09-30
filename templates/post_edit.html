@@ -2,13 +2,21 @@
 
 {% block content %}
 
-<div class="row">
-    <form action="{% url 'post_edit' request.user post.slug %}" method="post" enctype="multipart/form-data">
-        {{edit_form.as_p}}
-        {% csrf_token %}
-        <button class="btn-small">Save</button>
-        <a href="/" class="btn-small">Cancel</a>
-    </form>
-</div>
+    {% if post.author == request.user %}
+    <div class="row">
+        <form action="{% url 'post_edit' request.user post.slug %}" method="post" enctype="multipart/form-data">
+            {{edit_form.as_p}}
+            {% csrf_token %}
+            <button class="btn-small">Save</button>
+            <a href="/" class="btn-small">Cancel</a>
+        </form>
+    </div>
+
+    {% else %}
+        <div class="center">
+                <h4>Not Authenticated</h4>
+        </div>
+        
+    {% endif %}
 
 {% endblock %}

@@ -108,9 +108,10 @@ class CommentDelete(View):
 
 class UserPosts(View):
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, user, *args, **kwargs):
         try:
             user_posts = Post.objects.filter(author=request.user)
+            print(user)
             context = {
                 'user_posts': user_posts,
             }
@@ -152,3 +153,11 @@ class PostEdit(View):
 
             return redirect(reverse('post_detail', args=[slug]))
 
+
+class PostDelete(View):
+
+    def post(self, request, slug, *args, **kwargs):
+        post = Post.objects.get(slug=slug)
+        post.delete()
+
+        return redirect(reverse('user_posts', args=[request.user]))
