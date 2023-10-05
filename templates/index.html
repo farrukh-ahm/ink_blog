@@ -41,13 +41,16 @@
                             <small>Author: {{post.author}}</small>
                         </div>
                         <a href="{% url 'post_detail' post.slug %}" class="btn">Read</a>
-                        {% if user.is_authenticated %}
-                            {% if user.id in post.user_like %}
-                                <a href=""><i class="material-icons right">star</i></a>
-                            {% else %}
-                                <a href="#"><i class="material-icons right">star_border</i></a>
+                        <form action="{% url 'post_like_index' post.slug %}" class="right" method="POST">
+                            {% if user.is_authenticated %}
+                                {% csrf_token %}
+                                {% if user.id in post.user_like %}
+                                    <button class="valign-wrapper like-button">{{post.likes_count}}<i class="material-icons">star</i></button>
+                                {% else %}
+                                    <button class="valign-wrapper like-button">{{post.likes_count}}<i class="material-icons">star_border</i></button>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
+                        </form>
                     </div>
                 </div>
             </div>

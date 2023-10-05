@@ -161,3 +161,32 @@ class PostDelete(View):
         post.delete()
 
         return redirect(reverse('user_posts', args=[request.user]))
+
+
+class PostLike(View):
+
+    def post(self, request, slug, *args, **kwargs):
+
+        post = Post.objects.get(slug=slug)
+
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+
+        return redirect(reverse('post_detail', args=[slug]))
+
+
+
+class PostLikeIndex(View):
+
+    def post(self, request, slug, *args, **kwargs):
+
+        post = Post.objects.get(slug=slug)
+
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+
+        return redirect(reverse('home'))

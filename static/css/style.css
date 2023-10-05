@@ -112,6 +112,13 @@ textarea{
     .approval-btn {margin-block-start: 0.5rem;}
 }
 
+.like-button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: teal
+}
+
 /* hr{
     margin-block-end: 5rem;
 } */
