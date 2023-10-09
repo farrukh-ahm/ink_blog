@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- <div class="row">
+        <div class="col s-12 m-4 l-4 offset-m4 offset-l4 push-m1 push-l1">
+            <p>Username: {{user.username}}</p>
+            {% if user == request.user and user.email %}
+                <p>Email Id: {{user.email}}</p>
+            {% endif %}
+            <p>Posts: {{posts}}</p>
+            <p>Followers: </p>
+            <p>Following: </p>
+        </div>
+    </div> -->
+
+    <div class="profile-page" style="position: absolute; top: 25%; left: 50%; transform: translateX(-50%);">
+        <p>Username: {{user.username}}</p>
+            {% if user == request.user and user.email %}
+                <p>Email Id: {{user.email}}</p>
+            {% endif %}
+        <p>Posts: {{posts}}</p>
+        <p>Followers: </p>
+        <p>Following: </p>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'account_change_password' %}"><button class="btn-small">Change Password</button></a>
+            <a href="{% url 'account_email' %}"><button class="btn-small">Change Email</button></a>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -190,3 +190,20 @@ class PostLikeIndex(View):
             post.likes.add(request.user)
 
         return redirect(reverse('home'))
+
+
+class UserProfile(View):
+
+    def get(self, request, user, *args, **kwargs):
+        queryset = User.objects.all()
+        user = get_object_or_404(queryset, username=user)
+
+        posts = Post.objects.filter(author=user)
+        posts_count = posts.count()
+
+        context = {
+            'user': user,
+            'posts': posts_count,
+        }
+        
+        return render(request, 'profile.html', context)

@@ -14,7 +14,7 @@
             {{post_detail.content}}
         </div>
         <div class="col s12 m10 l8 offset-m1 offset-l2">
-            <small>Author: {{post_detail.author}}</small>
+            <small><a href="{% url 'profile' post_detail.author %}">Author: {{post_detail.author}}</a></small>
         </div>
         <form action="{% url 'post_like' post_detail.slug %}" class="col s1 m1 l1 pull-l1 pull-m1 push-s10" method="POST">
             {% if user.is_authenticated %}
