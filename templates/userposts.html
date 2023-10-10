@@ -4,7 +4,7 @@
 
 {% if user.is_authenticated %}
     <div class="add">
-        <a href="{% url 'add_post' request.user %}" class="valign-wrapper add-link">
+        <a href="{% url 'add_post' request.user %}" class="valign-wrapper add-link red-text text-lighten-2">
             <i class="material-icons">add_circle</i><span>Add Post</span>
         </a>
     </div>
@@ -17,10 +17,10 @@
                 <small style="display: block;">{{post.created_on}}</small>
             </div>
             <div class="col s6 m6 l9 push-l3">
-                    <a href="{% url 'post_detail' post.slug %}" class="col s12 m3 l2 btn-small" style="margin-inline-end: 1em; margin-block-end: 0.25em">Read</a>
+                    <a href="{% url 'post_detail' post.slug %}" class="col s12 m3 l2 btn-small link-controller purple lighten-1" style="margin-inline-end: 1em; margin-block-end: 0.25em">Read</a>
                     {% if post.author == request.user %}
-                        <a href="{% url 'post_edit' request.user post.slug %}" class="col s12 m3 l2 btn-small" style="margin-inline-end: 1em; margin-block-end: 0.25em">Edit</a>
-                        <button data-target="modal2" data-slug="{{post.slug}}" class="col s12 m3 l2 btn-small modal-trigger-2" style="margin-block-end: 0.25em">Delete</a>
+                        <a href="{% url 'post_edit' request.user post.slug %}" class="col s12 m3 l2 btn-small link-controller purple lighten-1" style="margin-inline-end: 1em; margin-block-end: 0.25em">Edit</a>
+                        <button data-target="modal2" data-slug="{{post.slug}}" class="col s12 m3 l2 btn-small modal-trigger-2 link-controller purple lighten-1" style="margin-block-end: 0.25em">Delete</a>
                     {% endif %}
             </div>
         </div>

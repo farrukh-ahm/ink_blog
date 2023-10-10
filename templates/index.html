@@ -10,7 +10,7 @@
     
     {% if user.is_authenticated %}
         <div class="add">
-            <a href="{% url 'add_post' request.user %}" class="valign-wrapper add-link">
+            <a href="{% url 'add_post' request.user %}" class="valign-wrapper add-link red-text text-lighten-2">
                 <i class="material-icons">add_circle</i><span>Add Post</span>
             </a>
         </div>
@@ -30,24 +30,24 @@
                 <div class="card">
                     <div class="card-image">
                         <img src="{{post.featured_image.url}}" alt="{{post.title}}">
-                        <span class="card-title red-text text-darken-1">{{post.title}}</span>
                     </div>
                     <div class="card-content">
-                        <p class="purple-text text-darken-4">{{post.excerpt}}</p>
+                        <span class="card-title purple-text text-lighten-1">{{post.title}}</span>
+                        <p class="">{{post.excerpt}}</p>
                     </div>
                     <div class="card-action">
                         <div class="small-container">
                             <small class="right">{{post.created_on}}</small>
                             <small>Author: {{post.author}}</small>
                         </div>
-                        <a href="{% url 'post_detail' post.slug %}" class="btn">Read</a>
+                        <a href="{% url 'post_detail' post.slug %}" class="btn purple lighten-1 link-controller">Read</a>
                         <form action="{% url 'post_like_index' post.slug %}" class="right" method="POST">
                             {% if user.is_authenticated %}
                                 {% csrf_token %}
                                 {% if user.id in post.user_like %}
-                                    <button class="valign-wrapper like-button">{{post.likes_count}}<i class="material-icons">star</i></button>
+                                    <button class="valign-wrapper like-button red-text text-lighten-2">{{post.likes_count}}<i class="material-icons">star</i></button>
                                 {% else %}
-                                    <button class="valign-wrapper like-button">{{post.likes_count}}<i class="material-icons">star_border</i></button>
+                                    <button class="valign-wrapper like-button red-text text-lighten-2">{{post.likes_count}}<i class="material-icons">star_border</i></button>
                                 {% endif %}
                             {% endif %}
                         </form>

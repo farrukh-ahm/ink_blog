@@ -1,18 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&family=Oswald:wght@300&family=Young+Serif&display=swap');
+
+body{
+    font-family: 'Lora', serif;
+}
+
+.link-controller{
+    font-family: 'Oswald', sans-serif;
+}
+
+#title{
+    font-family: 'Young Serif', serif;
+}
+
 @media (min-width: 800px){
     #title{
         padding-inline-start: 1.25rem;
     }
 }
 
-
-/* .card-handler{
-    margin-block-start: 1rem !important;
-} */
-
-/* #greetings{
-    background-color: black !important;
-    padding-block-start: 1rem !important;
-} */
 
 /* --------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------- HOME PAGE ------------------------------------------------------ */
@@ -34,6 +39,10 @@
 
 .small-container{
     margin-block-end: 1em;
+}
+
+.card-title{
+    font-family: 'Oswald', sans-serif;
 }
 
 
@@ -67,14 +76,14 @@
 /* --------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------- ADD POST ------------------------------------------------------- */
 
-h4{
-    margin-block: 3rem;
-}
-
 textarea{
     block-size: 25rem;
 }
 
+.post-title{
+    font-family: 'Oswald', sans-serif;
+    margin-block: 3rem;
+}
 
 /* --------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------- POST DETAIL ------------------------------------------------------- */
@@ -119,6 +128,10 @@ textarea{
     color: teal
 }
 
+.commentor{
+    font-family: 'Oswald', sans-serif;
+}
+
 /* hr{
     margin-block-end: 5rem;
 } */
@@ -139,6 +152,10 @@ textarea{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+
+/* --------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------- PROFILE PAGE ------------------------------------------------------- */
 
 .info-control{
 
