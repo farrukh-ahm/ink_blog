@@ -201,9 +201,85 @@ class UserProfile(View):
         posts = Post.objects.filter(author=user)
         posts_count = posts.count()
 
+        try:
+            queryset_sub = Subscribe.objects.all()
+            subscribers = get_object_or_404(queryset_sub, sub_to=user)
+            subs_count = subscribers.count()
+        
+        except:
+            subscribers = []
+            subs_count = 0
+
         context = {
             'user': user,
             'posts': posts_count,
+            'subscribers': subscribers,
+            'subs_count': subs_count
         }
         
         return render(request, 'profile.html', context)
+
+class UserFollow(View):
+
+    def post(self, request, user, *args, **kwargs):
+
+        queryset_user = User.objects.all()
+        user = get_object_or_404(queryset_user, username=user)
+        print(user.id)
+        # queryset_subb = Subscribe.objects.get(sub_to=user.id)
+        # subb = get_object_or_404(queryset_subb, sub_to=user.id)
+        # subb = Subscribe.objects.get(sub_to=user.id)
+        # print(subb)
+        
+        try:
+
+            queryset_subb = Subscribe.objects.filter(sub_to=user.id)
+
+            if user.subscriber.filter(id=request.user.id).exists():
+                # user.subscriber.remove(request.user)
+                queryset_subb.subscriber.remove(request.user)
+            else:
+                # user.subscriber.add(request.user)
+                print(queryset_subb)
+                queryset_subb.subscriber.add(request.user)
+
+        except:
+            subscription = Subscribe()
+            subscription.subscriber.set(request.user)
+            subscription.sub_to.set(user)
+            subscription.save()
+
+        # if subb.subscriber.filter(id=request.user.id).exists:
+        #     subb.subscriber.remove(request.user)
+        # else:
+        #     subb.subscriber.add(request.user)
+
+        # if request.user.id_sub_to.filter(id)
+
+        # queryset = User.objects.all()
+        # user = get_object_or_404(queryset, username=user)
+
+        # posts = Post.objects.filter(author=user)
+        # posts_count = posts.count()
+
+
+        # Getting Subscribers List
+        try:
+            queryset_sub = Subscribe.objects.all()
+            subscribers = get_object_or_404(queryset_sub, sub_to=user)
+            subs_count = subscribers.count()
+        
+        except:
+            subscribers = []
+            subs_count = 0
+
+        context = {
+            'user': user,
+            'posts': posts_count,
+            'subscribers': subscribers,
+            'subs_count': subs_count,
+        }
+
+        # return redirect(reverse('profile', args=[user], kwargs=[context]))
+        return redirect('index.html')
+

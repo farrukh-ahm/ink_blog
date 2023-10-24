@@ -14,4 +14,5 @@ urlpatterns = [
     path('post_detail/postlike/<slug:slug>', views.PostLike.as_view(), name='post_like'),
     path('post_detail/postlike_index/<slug:slug>', views.PostLikeIndex.as_view(), name='post_like_index'),
     path('profile/<str:user>', views.UserProfile.as_view(), name='profile'),
+    path('profile/follow/<str:user>', views.UserFollow.as_view(), name='follow'),
 ]

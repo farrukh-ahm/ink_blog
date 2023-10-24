@@ -2,6 +2,8 @@
 
 {% block content %}
 
+    {% if user.is_authenticated %}
+
     <div class="center" style="margin-block-start: 4rem;">
         <h4>Profile</h4>
     </div>
@@ -34,7 +36,7 @@
 
     <div class="row">
         <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-            <h6>Followers: </h6>
+                <h6>Followers: {{subs_count}}</h6>
         </div>
     </div>
 
@@ -44,30 +46,36 @@
         </div>
     </div>
 
-    <!-- <div class="profile-page">
-        <p>Username: {{user.username}}</p>
-            {% if user == request.user and user.email %}
-                
-                {% if user.email %}
-                    <p>Email Id: {{user.email}}</p>
-                {% else %}
-                    <p>Email Id: None</p>
-                {% endif %}
-
-            {% endif %}
-        <p>Posts: {{posts}}</p>
-        <p>Followers: </p>
-        <p>Following: </p>
+    <!-- <div class="row">
+        <div class="col s12 m4 l4 offset-m5 offset-l5">
+            <form action="">
+                <button class="btn-small">Follow</button>
+            </form>
+        </div>
     </div> -->
+
+    <div class="center" style="margin-block-end: 1rem;">
+        <form action="{% url 'follow' user.username %}" method="POST">
+            {% csrf_token %}
+            <button class="btn-small purple lighten-1 link-controller">Follow</button>
+        </form>
+    </div>
 
     {% if user == request.user %}
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col s12 m4 l4 offset-m4 offset-l4">
                 <a href="{% url 'account_change_password' %}" class="btn-small purple lighten-1">Change Password</a>
-                    <a href="{% url 'account_email' %}" class="btn-small purple lighten-1">Change Email</a>
+                <a href="{% url 'account_email' %}" class="btn-small purple lighten-1">Change Email</a>
             </div>
+        </div> -->
+
+        <div class="center">
+            <a href="{% url 'account_change_password' %}" class="btn-small purple lighten-1">Change Password</a>
+            <a href="{% url 'account_email' %}" class="btn-small purple lighten-1">Change Email</a>
         </div>
+
+    {% endif %}
 
     {% endif %}
 
