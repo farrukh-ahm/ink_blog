@@ -36,13 +36,13 @@
 
     <div class="row">
         <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-                <h6>Followers: {{subs_count}}</h6>
+                <h6>Followers: {{subscribers.sub_count}}</h6>
         </div>
     </div>
 
     <div class="row">
         <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-            <h6>Following: </h6>
+            <h6>Following: {{subbed}}</h6>
         </div>
     </div>
 
@@ -78,6 +78,6 @@
     {% endif %}
 
     {% endif %}
-
+{{subscribers}}
 
 {% endblock %}

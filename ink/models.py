@@ -53,5 +53,15 @@ class Subscribe(models.Model):
     subscriber = models.ManyToManyField(User, related_name='subscriber')
     sub_to = models.ManyToManyField(User, related_name='sub_to')
 
+    def sub_count(self):
+        return self.subscriber.count()
+
+    def user_subs(self):
+        subs = self.subscriber.all()
+        users = []
+        for i in like:
+            users.append(i.id)
+        return users
+
     def __str__(self):
-        return f'{sub_to}: {subscriber}'
+        return f'{self.sub_to}: {self.subscriber}'
