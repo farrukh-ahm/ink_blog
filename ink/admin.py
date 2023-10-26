@@ -1,8 +1,27 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group, User
 from .models import *
 from django_summernote.admin import SummernoteModelAdmin
 
-# Register your models here.
+admin.site.unregister(Group)
+admin.site.unregister(User)
+# admin.site.unregister(SocialAccounts)
+
+# admin.site.unregister(User)
+# admin.site.register(User)
+
+
+class ProfileInline(admin.StackedInline):
+    model = Profile
+
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    model = User
+    fields = ['username']
+    inlines = [ProfileInline]
+
+
 @admin.register(Post)
 class PostAdmin(SummernoteModelAdmin):
     prepopulated_fields = {'slug': ('author', 'title'),}

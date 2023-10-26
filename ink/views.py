@@ -204,14 +204,18 @@ class UserProfile(View):
 
         # Get the sub list of the user
         subscribers = Subscribe.objects.get(sub_to=user)
+
         subbed = user.subscriber.count()
 
+        # Get the profile set
+        profile = Profile.objects.get(user=user)
 
         context = {
             'user': user,
             'posts': posts_count,
             'subscribers': subscribers,
             'subbed': subbed,
+            'profile': profile,
         }
         
         return render(request, 'profile.html', context)
@@ -223,11 +227,9 @@ class UserFollow(View):
 
         queryset_user = User.objects.all()
         user_current = get_object_or_404(queryset_user, username=user)
-        
-        queryset_subb = Subscribe.objects.get(sub_to=user_current)
 
         try:
-
+            queryset_subb = Subscribe.objects.get(sub_to=user_current)
             if queryset_subb.subscriber.filter(id=request.user.id).exists():
                 queryset_subb.subscriber.remove(request.user)
                 print("remove")
@@ -235,7 +237,7 @@ class UserFollow(View):
                 queryset_subb.subscriber.add(request.user)
                 print("Add try block")
         
-        except queryset_subb.DoesNotExist:
+        except:
             print("leaving")
             subscription = Subscribe()
             subscription.save()
