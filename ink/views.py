@@ -210,15 +210,39 @@ class UserProfile(View):
         # Get the profile set
         profile = Profile.objects.get(user=user)
 
+        # Profile Editing Form
+        queryset_profile = Profile.objects.all()
+        user_profile = get_object_or_404(queryset_profile, user=request.user)
+        profile_form = ProfileForm(instance=user_profile)
+
         context = {
             'user': user,
             'posts': posts_count,
             'subscribers': subscribers,
             'subbed': subbed,
             'profile': profile,
+            'profile_form': profile_form,
         }
         
         return render(request, 'profile.html', context)
+
+    def post(self, request, user, *args, **kwargs):
+
+        # queryset = User.objects.all()
+        # get_user = get_object_or_404(queryset, username=user)
+
+        queryset_profile = Profile.objects.all()
+        user_profile = get_object_or_404(queryset_profile, user=request.user)
+
+        profile_form = ProfileForm(request.POST, request.FILES, instance=user_profile)
+
+        if profile_form.is_valid:
+            profile_form.save()
+            messages.success(request, 'Pokemon Data Updatd!')
+        else:
+            profile_form = ProfileForm
+
+        return redirect(reverse('profile', args=[request.user]))
 
 
 class UserFollow(View):

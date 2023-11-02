@@ -17,7 +17,7 @@
     <nav>
         <div class="nav-wrapper  purple lighten-1">
           <a href="#!" class="brand-logo teal-text text-lighten-4 offset-s2" id="title">Ink</a>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger purple-text text-darken-4"><i class="material-icons">menu</i></a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger teal-text text-lighten-4"><i class="material-icons">menu</i></a>
             {%   if user.is_authenticated%}
                 {% if user.is_superuser %}
                     <ul class="right hide-on-med-and-down ">
@@ -29,18 +29,18 @@
                     </ul>
                 {% else %}
                 <ul class="right hide-on-med-and-down ">
-                    <li><a href="/" class="purple-text text-darken-4">Home</a></li>
-                    <li><a href="{% url 'user_posts' request.user %}" class="purple-text text-darken-4">Posts</a></li>
-                    <li><a href="{% url 'profile' request.user %}" class="purple-text text-darken-4">Profile</a></li>
-                    <li><a href="{% url 'account_logout' %}" class="purple-text text-darken-4">LogOut</a></li>
+                    <li><a href="/" class="teal-text text-lighten-4">Home</a></li>
+                    <li><a href="{% url 'user_posts' request.user %}" class="teal-text text-lighten-4">Posts</a></li>
+                    <li><a href="{% url 'profile' request.user %}" class="teal-text text-lighten-4">Profile</a></li>
+                    <li><a href="{% url 'account_logout' %}" class="teal-text text-lighten-4">LogOut</a></li>
                 </ul>
                 {% endif %}
             {% else %}
 
                 <ul class="right hide-on-med-and-down ">
-                    <li><a href="/" class="purple-text text-darken-4">Home</a></li>
-                    <li><a href="{% url 'account_login' %}" class="purple-text text-darken-4">LogIn</a></li>
-                    <li><a href="{% url 'account_signup' %}" class="purple-text text-darken-4">SignUp</a></li>
+                    <li><a href="/" class="teal-text text-lighten-4">Home</a></li>
+                    <li><a href="{% url 'account_login' %}" class="teal-text text-lighten-4">LogIn</a></li>
+                    <li><a href="{% url 'account_signup' %}" class="teal-text text-lighten-4">SignUp</a></li>
                 </ul>
 
             {% endif %}
@@ -48,10 +48,10 @@
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="/" class="purple-text text-darken-4">Home</a></li>
-        <li><a href="{% url 'user_posts' request.user %}" class="purple-text text-darken-4">Posts</a></li>
-        <li><a href="{% url 'profile' request.user %}" class="purple-text text-darken-4">Profile</a></li>
-        <li><a href="" class="purple-text text-darken-4">LogIn</a></li>
+        <li><a href="/" class="teal-text text-lighten-4">Home</a></li>
+        <li><a href="{% url 'user_posts' request.user %}" class="teal-text text-lighten-4">Posts</a></li>
+        <li><a href="{% url 'profile' request.user %}" class="teal-text text-lighten-4">Profile</a></li>
+        <li><a href="" class="teal-text text-lighten-4">LogIn</a></li>
     </ul>
 
     {% if user.is_authenticated %}

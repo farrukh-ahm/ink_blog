@@ -25,3 +25,13 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('commented_text',)
+
+
+class ProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = {
+            'profile_pic', 'homepage_link', 'facebook_link',
+            'instagram_link', 'linkedin_link',
+        }
