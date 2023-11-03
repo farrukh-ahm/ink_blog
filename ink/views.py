@@ -202,12 +202,6 @@ class UserProfile(View):
         posts = Post.objects.filter(author=user)
         posts_count = posts.count()
 
-        # Get the sub list of the user
-        # subscribers = Subscribe.objects.get(sub_to=user)
-        # # subscribers = user.sub_to.count()
-
-        # subbed = user.subscriber.count()
-
         # Get the profile set
         profile = Profile.objects.get(user=user)
 
@@ -218,6 +212,7 @@ class UserProfile(View):
 
         context = {
             'user': user,
+            'current_user': user_profile,
             'posts': posts_count,
             # 'subscribers': subscribers,
             # 'subbed': subbed,
@@ -251,14 +246,16 @@ class UserFollow(View):
     def post(self, request, user, *args, **kwargs):
 
         user = User.objects.get(username=user)
-        profile = Profile.objects.get(user=user)
+        queryset = Profile.objects.all()
 
-        current_user = request.user.profile
+        profile = get_object_or_404(queryset, user=user)
 
-        if profile in current_user.follows.all:
-            current_user.follows.remove(profile)
+        current_user_profile = get_object_or_404(queryset, user=request.user)
+
+        if profile in current_user_profile.follows.all():
+            current_user_profile.follows.remove(profile)
         else:
-            current_user.follows.add(profile)
+            current_user_profile.follows.add(profile)
 
         # queryset_user = User.objects.all()
         # user_current = get_object_or_404(queryset_user, username=user)
@@ -300,15 +297,15 @@ class UserFollow(View):
 
         # Getting Post list
 
-        posts = Post.objects.filter(author=user_current.id)
-        posts_count = posts.count()
+        # posts = Post.objects.filter(author=user_current.id)
+        # posts_count = posts.count()
         
-        context = {
-            'user': user,
-            'posts': posts_count,
-            # 'subscribers': subscribers,
-            # 'subbed': subbed,
-        }
+        # context = {
+        #     'user': user,
+        #     'posts': posts_count,
+        #     # 'subscribers': subscribers,
+        #     # 'subbed': subbed,
+        # }
 
         return redirect(reverse('profile', args=[user]))
 

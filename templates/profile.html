@@ -82,12 +82,21 @@
 
         {% if request.user != user %}
 
-            <div class="center" style="margin-block-end: 1rem;">
-                <form action="{% url 'follow' user.username %}" method="POST">
-                    {% csrf_token %}
-                    <button class="btn-small purple lighten-1 link-controller">Follow</button>
-                </form>
-            </div>
+            {% if profile in current_user.follows.all %}
+                <div class="center" style="margin-block-end: 1rem;">
+                    <form action="{% url 'follow' user.username %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn-small purple lighten-1 link-controller">Unfollow</button>
+                    </form>
+                </div>
+            {% else %}
+                <div class="center" style="margin-block-end: 1rem;">
+                    <form action="{% url 'follow' user.username %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn-small purple lighten-1 link-controller">Follow</button>
+                    </form>
+                </div>
+            {% endif %}
         {% endif %}
 
         {% if user == request.user %}
