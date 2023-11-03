@@ -10,13 +10,13 @@ class Subscribe(models.Model):
     subscriber = models.ManyToManyField(User, related_name='subscriber')
     sub_to = models.ManyToManyField(User, related_name='sub_to')
 
-    def sub_count(self):
-        return self.subscriber.count()
+    # def sub_count(self):
+    #     return self.subscriber.count()
 
     def user_subs(self):
         subs = self.subscriber.all()
         users = []
-        for i in like:
+        for i in subs:
             users.append(i.id)
         return users
 
@@ -30,22 +30,33 @@ class Profile(models.Model):
     facebook_link = models.CharField(null=True, blank=True, max_length=100)
     instagram_link = models.CharField(null=True, blank=True, max_length=100) 
     linkedin_link = models.CharField(null=True, blank=True, max_length=100)
-    # follows = models.ManyToManyField("self", related_name="followed_by", symmetrical=False, blank=True)
+    follows = models.ManyToManyField("self", related_name="followed_by", symmetrical=False, blank=True)
 
+    def sub_count(self):
+        return self.followed_by.count()
+    
+    def following(self):
+        return self.follows.count()
+
+    def __str__(self):
+        return self.user.username
 
 # Creating profile when user is created
 
 # @receiver(post_save, sender=User) --> can either use the @receiver decorator or the post_save signal as below
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        user_profile = Profile(user=instance)
+        user_profile = Profile.objects.create(user=instance)
         user_profile.save()
         # Have the user follow themselves
-        user_follow = Subscribe()
-        user_follow.save()
-        user_follow.subscriber.set([instance.id])
-        user_follow.sub_to.set([instance.id])
-        user_follow.save()
+        # user_follow = Subscribe()
+        # user_follow.save()
+        # user_follow.subscriber.set([instance.id])
+        # user_follow.sub_to.set([instance.id])
+        # user_follow.save()
+
+        user_profile.follows.add(user_profile.id)
+        user_profile.save()
 
 post_save.connect(create_profile, sender=User)
 

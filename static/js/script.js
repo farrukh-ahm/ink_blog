@@ -99,6 +99,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
   }
 
+  let test = document.querySelector(".test")
+  let dataIn = test.getAttribute("data-test")
+  console.log(typeof(dataIn))
+
   });
 
     

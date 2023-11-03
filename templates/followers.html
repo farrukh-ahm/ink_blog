@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for following in profile.follows.all %}
+
+        {{following.user.username}}
+
+    {% endfor %}
+
+    {% for following in profile.followed_by.all %}
+
+        {{following.user.username}}
+
+    {% endfor %}
+ 
+{% endblock %}

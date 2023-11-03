@@ -35,22 +35,22 @@
 
         <div class="row">
             <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-                <h6>Homepage Link: {{profile.homepage_link}}</h6>
+                <h6>Homepage: {{profile.homepage_link}}</h6>
             </div>
         </div>
         <div class="row">
             <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-                <h6>Facebook Link: {{profile.facebook_link}}</h6>
+                <h6>Facebook: {{profile.facebook_link}}</h6>
             </div>
         </div>
         <div class="row">
             <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-                <h6>Instagram Link: {{profile.instagram_link}}</h6>
+                <h6>Instagram: {{profile.instagram_link}}</h6>
             </div>
         </div>
         <div class="row">
             <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-                <h6>LinkedIn Link: {{profile.linkedin_link}}</h6>
+                <h6>LinkedIn: {{profile.linkedin_link}}</h6>
             </div>
         </div>
 
@@ -62,13 +62,13 @@
 
         <div class="row">
             <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-                    <h6>Followers: {{subscribers.sub_count}}</h6>
+                    <h6><a href="{% url 'followers' user %}">Followers</a>: {{profile.sub_count}}</h6>
             </div>
         </div>
 
         <div class="row">
             <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-                <h6>Following: {{subbed}}</h6>
+                <h6><a href="{% url 'followers' user %}">Following</a>: {{profile.following}}</h6>
             </div>
         </div>
 

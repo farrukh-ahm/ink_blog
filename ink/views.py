@@ -203,9 +203,10 @@ class UserProfile(View):
         posts_count = posts.count()
 
         # Get the sub list of the user
-        subscribers = Subscribe.objects.get(sub_to=user)
+        # subscribers = Subscribe.objects.get(sub_to=user)
+        # # subscribers = user.sub_to.count()
 
-        subbed = user.subscriber.count()
+        # subbed = user.subscriber.count()
 
         # Get the profile set
         profile = Profile.objects.get(user=user)
@@ -218,8 +219,8 @@ class UserProfile(View):
         context = {
             'user': user,
             'posts': posts_count,
-            'subscribers': subscribers,
-            'subbed': subbed,
+            # 'subscribers': subscribers,
+            # 'subbed': subbed,
             'profile': profile,
             'profile_form': profile_form,
         }
@@ -249,32 +250,52 @@ class UserFollow(View):
 
     def post(self, request, user, *args, **kwargs):
 
-        queryset_user = User.objects.all()
-        user_current = get_object_or_404(queryset_user, username=user)
+        user = User.objects.get(username=user)
+        profile = Profile.objects.get(user=user)
 
-        try:
-            queryset_subb = Subscribe.objects.get(sub_to=user_current)
-            if queryset_subb.subscriber.filter(id=request.user.id).exists():
-                queryset_subb.subscriber.remove(request.user)
-                print("remove")
-            else:
-                queryset_subb.subscriber.add(request.user)
-                print("Add try block")
+        current_user = request.user.profile
+
+        if profile in current_user.follows.all:
+            current_user.follows.remove(profile)
+        else:
+            current_user.follows.add(profile)
+
+        # queryset_user = User.objects.all()
+        # user_current = get_object_or_404(queryset_user, username=user)
+
+        # queryset_subb = Subscribe.objects.get(sub_to=user_current)
+
+        # if queryset_subb.subscriber.filter(id=request.user.id).exists():
+        #         queryset_subb.subscriber.remove(request.user)
+        #         print("remove")
+        # else:
+        #     queryset_subb.subscriber.add(request.user)
+        #     print("Add")
+
+        # try:
+        #     queryset_subb = Subscribe.objects.get(sub_to=user_current)
+        #     if queryset_subb.subscriber.filter(id=request.user.id).exists():
+        #         queryset_subb.subscriber.remove(request.user)
+        #         print("remove")
+        #     else:
+        #         queryset_subb.subscriber.add(request.user)
+        #         print("Add try block")
         
-        except:
-            print("leaving")
-            subscription = Subscribe()
-            subscription.save()
-            subscription.subscriber.set([request.user])
-            subscription.sub_to.set([user_current])
-            subscription.save()
-            print("check")
+        # except:
+        #     print("leaving")
+        #     subscription = Subscribe()
+        #     subscription.save()
+        #     subscription.subscriber.set([request.user])
+        #     subscription.sub_to.set([user_current])
+        #     subscription.save()
+        #     print("check")
 
 
         # Getting Subscribers List
 
-        subscribers = Subscribe.objects.get(sub_to=user_current)
-        subbed = user_current.subscriber.count()
+        # print(queryset_subb)
+        # subscribers = user_current.sub_to.count()
+        # subbed = user_current.subscriber.count()
 
 
         # Getting Post list
@@ -285,9 +306,26 @@ class UserFollow(View):
         context = {
             'user': user,
             'posts': posts_count,
-            'subscribers': subscribers,
-            'subbed': subbed,
+            # 'subscribers': subscribers,
+            # 'subbed': subbed,
         }
 
         return redirect(reverse('profile', args=[user]))
 
+
+class FollowerFollowing(View):
+
+    def get(self, request, user, *args, **kwargs):
+
+        queryset_user = User.objects.all()
+        user = User.objects.get(username=user)
+        profile = Profile.objects.get(user=user)
+        print(profile)
+
+        context = {
+
+            'profile': profile,
+
+        }
+
+        return render(request, 'followers.html', context)
