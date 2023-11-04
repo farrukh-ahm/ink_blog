@@ -1,10 +1,14 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 {% block head_title %}
     {% trans "Email Address" %}
 {% endblock %}
+
 {% block content %}
-    <h1>{% trans "Email Address" %}</h1>
+
+    <div>
+        <h2 class="center auth-title purple-text text-lighten-1">{% trans "Email Address" %}</h2>
+    </div>
     {% if emailaddresses %}
         {% if current_emailaddress %}
             <p>

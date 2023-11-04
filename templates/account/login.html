@@ -8,7 +8,7 @@
 {% block content %}
 
 <div>
-  <h2 class="center auth-title">{% trans "Sign In" %}</h2>
+  <h2 class="center auth-title purple-text text-lighten-1">{% trans "Sign In" %}</h2>
 </div>
 
 {% get_providers as socialaccount_providers %}
@@ -26,7 +26,7 @@
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
-    <button class="primaryAction btn" type="submit">{% trans "Sign In" %}</button>
+    <button class="primaryAction btn-small purple lighten-1" type="submit"><i class="material-icons small right">insert_emoticon</i>{% trans "Sign In" %}</button>
   </form>
 
 </div>

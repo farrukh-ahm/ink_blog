@@ -1,33 +1,47 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
 {% load i18n %}
 
 {% block head_title %}{% trans "Email Addresses" %}{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Email Addresses" %}</h1>
+
+  <div>
+
+    <h3 class="center auth-title purple-text text-lighten-1">{% trans "Email Addresses" %}</h3>
+
+  </div>  
+
+
 {% if emailaddresses %}
-<p>{% trans 'The following email addresses are associated with your account:' %}</p>
+  <div>
+    <p class="center">{% trans 'The following email addresses are associated with your account:' %}</p>
+  </div>
 
 <form action="{% url 'account_email' %}" class="email_list" method="post">
 {% csrf_token %}
 <fieldset class="blockLabels">
 
   {% for emailaddress in emailaddresses %}
-<div class="ctrlHolder">
+
+  <div class="row">
+
+    <div class="ctrlHolder">
       <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%}">
 
-      <input id="email_radio_{{forloop.counter}}" type="radio" name="email" {% if emailaddress.primary or emailaddresses|length == 1 %}checked="checked"{%endif %} value="{{emailaddress.email}}"/>
+        <input id="email_radio_{{forloop.counter}}" type="radio" name="email" {% if emailaddress.primary or emailaddresses|length == 1 %}checked="checked"{%endif %} value="{{emailaddress.email}}"/>
 
-{{ emailaddress.email }}
-    {% if emailaddress.verified %}
-    <span class="verified">{% trans "Verified" %}</span>
-    {% else %}
-    <span class="unverified">{% trans "Unverified" %}</span>
-    {% endif %}
-      {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
-</label>
-</div>
+      {{ emailaddress.email }}
+          {% if emailaddress.verified %}
+          <span class="verified">{% trans "Verified" %}</span>
+          {% else %}
+          <span class="unverified">{% trans "Unverified" %}</span>
+          {% endif %}
+            {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
+      </label>
+  </div>
+
+  </div>
   {% endfor %}
 
 <div class="buttonHolder">

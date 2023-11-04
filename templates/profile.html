@@ -85,7 +85,7 @@
                 <div class="center" style="margin-block-end: 1rem;">
                     <form action="{% url 'follow' user.username %}" method="POST">
                         {% csrf_token %}
-                        <button class="btn-small purple lighten-1 link-controller">Unfollow</button>
+                        <button class="btn-small  red accent-2 link-controller">Unfollow</button>
                     </form>
                 </div>
             {% else %}
@@ -110,7 +110,6 @@
             <div class="center" style="margin-block-end: 1rem;">
                 <button class="btn-small purple lighten-1 modal-trigger-3" data-user="{{request.user}}">Edit</button>
                 <a href="{% url 'account_change_password' %}" class="btn-small purple lighten-1">Change Password</a>
-                <a href="{% url 'account_email' %}" class="btn-small purple lighten-1">Change Email</a>
             </div>
 
         {% endif %}

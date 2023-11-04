@@ -6,7 +6,7 @@
 
 {% block content %}
 <div>
-  <h2 class="center auth-title">{% trans "Sign Up" %}</h2>
+  <h2 class="center auth-title purple-text text-lighten-1">{% trans "Sign Up" %}</h2>
 </div>
 
 <div class="auth-p">
@@ -21,7 +21,7 @@
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
-    <button type="submit" class="btn">{% trans "Sign Up" %} &raquo;</button>
+    <button type="submit" class="btn-small purple lighten-1"><i class="material-icons small right">check_circle</i>{% trans "Sign Up" %} &raquo;</button>
   </form>
 
 </div>

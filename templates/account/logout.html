@@ -10,7 +10,7 @@
   <div class="col s12 m6 l4 offset-m3 offset-l4 signout-container">
   
     <div>
-      <h2 class="center auth-title">{% trans "Sign Out" %}</h2>
+      <h2 class="center auth-title purple-text text-lighten-1">{% trans "Sign Out?" %}</h2>
     </div>
     
     
@@ -25,7 +25,7 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
-        <button type="submit" class="btn">{% trans 'Sign Out' %}</button>
+        <button type="submit" class="btn-small purple lighten-1"><i class="material-icons small right">directions_run</i>{% trans 'Sign Out' %}</button>
       </form>
     
     </div>

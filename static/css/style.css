@@ -20,7 +20,7 @@ body{
 
 .modal{
 
-    min-block-size: 30rem;
+    max-inline-size: 30rem;
 
 }
 
@@ -72,7 +72,6 @@ body{
 /* --------------------------------------------- AUTH PAGES ----------------------------------------------------- */
 .auth-title{
     margin-block-end: 2.5rem;
-    color: brown;
 }
 
 .auth-p{
@@ -80,20 +79,28 @@ body{
 }
 
 .auth-form{
-    outline: 1px solid goldenrod;
-    outline-offset: 2rem;
+    /* outline: 1px solid goldenrod; */
+    /* outline-offset: 2rem; */
     padding: 2rem;
 }
 
-.auth-form input{
-    color: brown;
+input{
+    /* color: rgb(196, 116, 250); */
+    /* border-bottom: 1px solid yellow !important; */
+    /* border-bottom: none !important; */
 }
 
 .signout-container{
-    outline: 1px solid goldenrod;
-    outline-offset: 2rem;
+    /* outline: 1px solid goldenrod;
+    outline-offset: 2rem; */
     margin-block-start: 5rem;
 }
+
+
+input:focus {
+    border-bottom: 1px solid rgb(196, 116, 250) !important;
+    box-shadow: 0 1px 0 0 rgb(196, 116, 250) !important;
+  }
 
 /* --------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------- ADD POST ------------------------------------------------------- */
