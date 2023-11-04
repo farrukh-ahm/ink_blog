@@ -2,16 +2,42 @@
 
 {% block content %}
 
-    {% for following in profile.follows.all %}
+{% if user.is_authenticated %}
 
-        {{following.user.username}}
+    <div class="center follower-page-header">
+        <h5>Followers of {{profile.user.username}}</h5>
+    </div>
 
+    {% for following in profile.followed_by.all|dictsort:"user.username" %}
+    <div class="row follow-page-follower-row">
+        <div class="col s12 m6 l6 offset-m3 offset-l3 info-control valign-wrapper">
+            <img src="{{following.profile_pic.url}}" class="follow-page-img"> 
+            <span class="follow-page-span"><a href="{% url 'profile' following.user.username %}">{{following.user.username}}</a></span>
+            <br><br>
+        </div>
+    </div>
     {% endfor %}
 
-    {% for following in profile.followed_by.all %}
+    <br><br><br><br><br>
 
-        {{following.user.username}}
+    <div class="center follower-page-header">
+        <h5>Following</h5>
+    </div>
+
+    <br><br><br><br>
+
+    {% for following in profile.follows.all|dictsort:"user.username" %}
+
+    <div class="row follow-page-follower-row">
+        <div class="col s12 m6 l6 offset-m3 offset-l3 info-control valign-wrapper">
+            <img src="{{following.profile_pic.url}}" class="follow-page-img"> 
+            <span class="follow-page-span"><a href="{% url 'profile' following.user.username %}">{{following.user.username}}</a></span>
+            <br><br>
+        </div>
+    </div>
 
     {% endfor %}
  
+{% endif %}
+
 {% endblock %}

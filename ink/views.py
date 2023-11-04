@@ -32,9 +32,10 @@ class AddPost(View):
             new_post.slug = slugify(f'{request.user}-{new_post.title}')
 
             new_post.save()
+            messages.success(request, "Ink Posted!")
         else:
             add_post_form = PostForm()
-        messages.success(request, "Post Added!")
+            messages.warning(request, "An Error Occured!")
         return redirect("/")
 
 
@@ -80,8 +81,10 @@ class PostComment(View):
             comment.approved = False
 
             comment.save()
+            messages.success(request, "Comment Added!")
         else:
             comment_post = CommentForm()
+            messages.warning(request, "An Error Occured!")
         
         return redirect(reverse('post_detail', args=[post_find.slug]))
 
@@ -93,6 +96,7 @@ class CommentApprove(View):
         comment.approved = True
         comment.save()
 
+        messages.success(request, "Comment Approved")
         return redirect(reverse('post_detail', args=[post.slug]))
 
 class CommentDelete(View):
@@ -103,14 +107,16 @@ class CommentDelete(View):
         post = comment.commented_post
         comment.delete()
 
+        messages.warning(request, "Comment Deleted")
         return redirect(reverse('post_detail', args=[post.slug]))
 
 
 class UserPosts(View):
 
     def get(self, request, user, *args, **kwargs):
+        user = User.objects.get(username=user)
         try:
-            user_posts = Post.objects.filter(author=request.user)
+            user_posts = Post.objects.filter(author=user)
             print(user)
             context = {
                 'user_posts': user_posts,
@@ -146,11 +152,12 @@ class PostEdit(View):
             edit_details.slug = slugify(f'{request.user}-{edit_details.title}')
             edit_details.save()
 
+            messages.success(request, "Ink Edited!")
             return redirect(reverse('post_detail', args=[edit_details.slug]))
         
         else:
             edit_form = PostForm()
-
+            messages.warning(request, "An Error Occured!")
             return redirect(reverse('post_detail', args=[slug]))
 
 
@@ -160,6 +167,7 @@ class PostDelete(View):
         post = Post.objects.get(slug=slug)
         post.delete()
 
+        messages.warning(request, "Ink Wiped Off!")
         return redirect(reverse('user_posts', args=[request.user]))
 
 
@@ -195,32 +203,37 @@ class PostLikeIndex(View):
 class UserProfile(View):
 
     def get(self, request, user, *args, **kwargs):
-        queryset = User.objects.all()
-        user = get_object_or_404(queryset, username=user)
 
-        # Get all posts by the user
-        posts = Post.objects.filter(author=user)
-        posts_count = posts.count()
+        if request.user.is_authenticated:
+            queryset = User.objects.all()
+            user = get_object_or_404(queryset, username=user)
 
-        # Get the profile set
-        profile = Profile.objects.get(user=user)
+            # Get all posts by the user
+            posts = Post.objects.filter(author=user)
+            posts_count = posts.count()
 
-        # Profile Editing Form
-        queryset_profile = Profile.objects.all()
-        user_profile = get_object_or_404(queryset_profile, user=request.user)
-        profile_form = ProfileForm(instance=user_profile)
+            # Get the profile set
+            profile = Profile.objects.get(user=user)
 
-        context = {
-            'user': user,
-            'current_user': user_profile,
-            'posts': posts_count,
-            # 'subscribers': subscribers,
-            # 'subbed': subbed,
-            'profile': profile,
-            'profile_form': profile_form,
-        }
-        
-        return render(request, 'profile.html', context)
+            # Profile Editing Form
+            queryset_profile = Profile.objects.all()
+            user_profile = get_object_or_404(queryset_profile, user=request.user)
+            profile_form = ProfileForm(instance=user_profile)
+
+            context = {
+                'user': user,
+                'current_user': user_profile,
+                'posts': posts_count,
+                # 'subscribers': subscribers,
+                # 'subbed': subbed,
+                'profile': profile,
+                'profile_form': profile_form,
+            }
+            
+            return render(request, 'profile.html', context)
+
+        else:
+            return redirect(reverse('home'))
 
     def post(self, request, user, *args, **kwargs):
 
@@ -234,10 +247,11 @@ class UserProfile(View):
 
         if profile_form.is_valid:
             profile_form.save()
-            messages.success(request, 'Pokemon Data Updatd!')
+            messages.success(request, 'Profile Updated!')
         else:
             profile_form = ProfileForm
-
+            messages.warning(request, "An Error Occured!")
+            
         return redirect(reverse('profile', args=[request.user]))
 
 

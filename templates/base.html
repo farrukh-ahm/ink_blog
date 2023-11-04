@@ -47,22 +47,58 @@
         </div>
     </nav>
 
-    <ul class="sidenav" id="mobile-demo">
-        <li><a href="/" class="teal-text text-lighten-4">Home</a></li>
-        <li><a href="{% url 'user_posts' request.user %}" class="teal-text text-lighten-4">Posts</a></li>
-        <li><a href="{% url 'profile' request.user %}" class="teal-text text-lighten-4">Profile</a></li>
-        <li><a href="" class="teal-text text-lighten-4">LogIn</a></li>
-    </ul>
+    {%   if user.is_authenticated%}
+                {% if user.is_superuser %}
+                    <ul class="sidenav" id="mobile-demo">
+                        <li><a href="/" class="teal-text text-lighten-4">Home</a></li>
+                        <li><a href="{% url 'user_posts' request.user %}" class="teal-text text-lighten-4">Posts</a></li>
+                        <li><a href="{% url 'profile' request.user %}" class="teal-text text-lighten-4">Profile</a></li>
+                        <li><a href="{% url 'admin:index' %}" class="teal-text text-lighten-4">Admin</a></li>
+                        <li><a href="{% url 'account_logout' %}" class="teal-text text-lighten-4">LogOut</a></li>
+                    </ul>
+                {% else %}
+                <ul class="sidenav" id="mobile-demo">
+                    <li><a href="/" class="teal-text text-lighten-4">Home</a></li>
+                    <li><a href="{% url 'user_posts' request.user %}" class="teal-text text-lighten-4">Posts</a></li>
+                    <li><a href="{% url 'profile' request.user %}" class="teal-text text-lighten-4">Profile</a></li>
+                    <li><a href="{% url 'account_logout' %}" class="teal-text text-lighten-4">LogOut</a></li>
+                </ul>
+                {% endif %}
+            {% else %}
+
+                <ul class="sidenav" id="mobile-demo">
+                    <li><a href="/" class="teal-text text-lighten-4">Home</a></li>
+                    <li><a href="{% url 'account_login' %}" class="teal-text text-lighten-4">LogIn</a></li>
+                    <li><a href="{% url 'account_signup' %}" class="teal-text text-lighten-4">SignUp</a></li>
+                </ul>
+
+            {% endif %}
+
+
+    <!-- Flash Message -->
+    {% if messages %}
+            
+            {% for message in messages %}
+            <div class="row" id="message">
+            <div class="col s12 m4 l4 push-m4 push-l4 center-align">
+                <p class="{{message.tags}}">{{message}}</p>
+              </div>
+            </div>
+            {% endfor %}
+        
+    {% endif %}
+
 
     {% if user.is_authenticated %}
-        <div class="center" id="greeting" style="margin: 1.5rem;">
+        <div class="center greeting">
             Welcome {{user.get_username}}
         </div>
     {% else %}
-        <div class="center" id="greeting" style="margin: 1.5rem;">
+        <div class="center greeting">
             Welcome Guest
         </div>
     {% endif %}
+
 
     <div class="container">
         {% block content %}
@@ -71,6 +107,16 @@
     </div>
     
 
+
+
+    <!-- Custom Script for Flash Messages -->
+    <script>
+        let message = document.querySelector("#message")
+    
+        setTimeout(function(){
+            message.remove()
+          }, 3000)
+    </script>
 
     <!-- Materialise Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

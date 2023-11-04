@@ -18,19 +18,18 @@
             </div>
         </div>
 
+        {% if user == request.user%}
         <div class="row">
             <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-                {% if user == request.user%}
                     
                     {% if user.email %}
                         <h6>Email Id: {{user.email}}</h6>
                     {% else %}
                         <h6>Email Id: None</h6>
                     {% endif %}
-
-                {% endif %}
             </div>
         </div>
+        {% endif %}
 
 
         <div class="row">
@@ -56,7 +55,7 @@
 
         <div class="row">
             <div class="col s12 m4 l4 offset-m4 offset-l4 info-control">
-                <h6>Posts: {{posts}}</h6>
+                <h6><a href="{% url 'user_posts' user %}">Posts</a>: {{posts}}</h6>
             </div>
         </div>
 
