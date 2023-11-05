@@ -41,6 +41,27 @@ body{
     /* margin-block-start: 2px; */
 }
 
+input:focus {
+    border-bottom: 1px solid rgb(196, 116, 250) !important;
+    box-shadow: 0 1px 0 0 rgb(196, 116, 250) !important;
+  }
+
+/* textarea{
+    border: 1px solid red
+} */
+
+textarea{
+    border: 1px solid rgb(207, 205, 205);
+}
+
+textarea:focus{
+    border: 2px solid rgb(196, 116, 250);
+    /* border-color: pink !important; */
+    /* box-shadow: 0 0 5px 0 rgb(196, 116, 250) !important; */
+    outline: none !important;
+    /* background-color: #FF9E86; */
+}
+
 /* --------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------- HOME PAGE ------------------------------------------------------ */
 
@@ -95,12 +116,6 @@ input{
     outline-offset: 2rem; */
     margin-block-start: 5rem;
 }
-
-
-input:focus {
-    border-bottom: 1px solid rgb(196, 116, 250) !important;
-    box-shadow: 0 1px 0 0 rgb(196, 116, 250) !important;
-  }
 
 /* --------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------- ADD POST ------------------------------------------------------- */
@@ -169,7 +184,7 @@ textarea{
 /* --------------------------------------------- USER POSTS ------------------------------------------------------- */
 
 .post-list{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(216, 208, 208);
     /* inline-size: 50%; */
 }
 

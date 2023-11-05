@@ -9,10 +9,10 @@
 
         <div class="row">
 
-            <form class="col s12 m8 l6 offset-m3 offset-l3 add_post_form" action="{% url 'add_post' request.user%}" method="post" enctype="multipart/form-data">
+            <form class="col s12 m10 l8 offset-m1 offset-l2 add_post_form" action="{% url 'add_post' request.user%}" method="post" enctype="multipart/form-data">
                 {{add_post_form.as_p}}
                 {% csrf_token %}
-                <button class="btn" type="submit">Submit</button>
+                <button class="btn purple lighten-1" type="submit">Submit</button>
             </form>
 
         </div>

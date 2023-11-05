@@ -1,1 +1,1 @@
-web: gunicorn ink_blog.wsgi
+web: gunicorn ink_blog.wsgi --log-file -
