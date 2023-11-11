@@ -7,8 +7,8 @@
         <form action="{% url 'post_edit' request.user post.slug %}" method="post" enctype="multipart/form-data">
             {{edit_form.as_p}}
             {% csrf_token %}
-            <button class="btn-small">Save</button>
-            <a href="/" class="btn-small">Cancel</a>
+            <button class="btn-small purple lighten-1">Save</button>
+            <a href="/" class="btn-small red accent-2">Cancel</a>
         </form>
     </div>
 

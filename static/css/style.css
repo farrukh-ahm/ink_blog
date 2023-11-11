@@ -88,6 +88,117 @@ textarea:focus{
     font-family: 'Oswald', sans-serif;
 }
 
+.typing-container{
+
+    block-size: 8rem;
+    /* background-color: #FF9E86; */
+
+}
+
+.typing-list{
+
+    list-style: none;
+    height: 90px;
+    line-height: 90px;
+    overflow: hidden;
+    position: absolute;
+    top: 16%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* inline-size: min(); */
+    /* margin: auto; */
+
+}
+
+.typing-texts{
+
+    font-family: monospace;
+    font-size: 2.5em;
+    inline-size: min(max-content, 100vw);
+    /* border: 1px solid blue ; */
+    position: relative;
+    top: 0;
+    animation: sliding 9s steps(3) infinite;
+
+}
+
+
+.typing-texts::before {
+
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-left: 1px solid rgb(196, 116, 250);
+    background-color: #fff;
+    animation: typing 3s steps(19) infinite;
+
+}
+
+@media (max-width: 875px){
+
+    .typing-container{
+        block-size: 5rem;
+    }
+
+    .typing-list{
+        
+        top: 12%;
+        left: 50%;
+        transform: translateX(-50%);
+
+    }
+
+    .typing-texts{
+        font-size: 1.5em;
+    }
+    .typing-texts::before{
+        height: 50% !important;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+
+}
+
+@media (max-width: 500px){
+
+    .typing-container{
+        block-size: 5rem;
+    }
+
+
+    .typing-texts{
+        font-size: 1em;
+    }
+    /* .typing-texts::before{
+        height: 50% !important;
+        top: 50%;
+        transform: translateY(-50%);
+    } */
+}
+
+@keyframes typing {
+
+    40%, 60%{
+        /* left: calc(100% + 10px); */
+        left: 100%;
+      }
+      100%{
+        left: 0;
+      }
+
+}
+
+@keyframes sliding {
+
+    to{
+        top: -270px;
+}
+
+}
 
 /* --------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------- AUTH PAGES ----------------------------------------------------- */
@@ -138,10 +249,20 @@ textarea{
     /* background-color: aqua; */
 }
 
+@media (max-width: 450px){
+    .post-image {
+        block-size: 25rem;
+        inline-size: 20rem;
+    }
+}
+
 .post-image > img {
     block-size: 100%;
     inline-size: 100%;
     border-radius: 10px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .post-content{
